@@ -7,7 +7,6 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
-
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
@@ -15,7 +14,6 @@ public class Game extends Canvas implements Runnable, KeyListener{
 
 	public static int WIDTH = 480, HEIGHT = 480;
 	public Player player;
-	
 	public Game() {
 		this.addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -38,7 +36,6 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		player.Render(g);
 		bs.show();
 	}
-	
 	public static void main(String[] args) {
 		Game game = new Game();
 		JFrame frame = new JFrame();
