@@ -4,19 +4,26 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
+
 import javax.swing.JFrame;
 
-public class Game extends Canvas implements Runnable{
+@SuppressWarnings("serial")
+public class Game extends Canvas implements Runnable, KeyListener{
 
-	private static final long serialVersionUID = 1L;
 	public static int WIDTH = 480, HEIGHT = 480;
+	public Player player;
 	
 	public Game() {
+		this.addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		player = new Player(0, 0);
 	}
 	
 	public void Tick() {
+		player.Tick();
 	}
 	
 	public void Render() {
@@ -28,8 +35,7 @@ public class Game extends Canvas implements Runnable{
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.black);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
-		g.setColor(Color.red);
-		g.fillRect(0, 0, 50, 50);
+		player.Render(g);
 		bs.show();
 	}
 	
@@ -55,6 +61,42 @@ public class Game extends Canvas implements Runnable{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			player.right = true;
+		}else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			player.left = true;
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_UP) {
+			player.up = true;
+		}else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+			player.down = true;
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			player.right = false;
+		}else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			player.left = false;
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_UP) {
+			player.up = false;
+		}else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+			player.down = false;
 		}
 	}
 
