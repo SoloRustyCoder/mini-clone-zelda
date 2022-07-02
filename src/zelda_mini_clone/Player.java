@@ -15,14 +15,14 @@ public class Player extends Rectangle {
 	}
 	
 	public void Tick() {
-		if(right == true) {
+		if(right == true && World.IsFree(x + speed, y)) {
 			x += speed;
-		} else if(left == true) {
+		} else if(left == true && World.IsFree(x - speed, y)) {
 			x -= speed;
 		};
-		if(up == true) {
+		if(up == true && World.IsFree(x, y - speed)) {
 			y -= speed;
-		} else if(down == true) {
+		} else if(down == true && World.IsFree(x, y + speed)) {
 			y += speed;
 		};
 		
